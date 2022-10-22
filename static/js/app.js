@@ -33,3 +33,27 @@ function buildTable(data) {
     });
 
 }
+
+function handleClick() {
+    // Selete the first element that matches the selector string "#datetime"
+    let date = d3.select("#datetime").property("value");
+
+    // Set a default fiter (our original data imported from data.js)
+    let filteredData = tableData;
+
+    if (date) {
+
+        filteredData = filteredData.filter(row => row.datetime === date);
+
+    };
+
+    // Rebuild the table using the filtered data
+    buildTable(filteredData);
+
+}
+
+// We'll add a button element in the HTML called "filter-btn." Here we're telling D3 to run the handleClick function when the button with an ID of filter-btn is clicked.
+d3.selectAll("#filter-btn").on("click", handleClick);
+
+// Build the original table when the page loads
+buildTable(tableData);
