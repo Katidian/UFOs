@@ -52,8 +52,6 @@ function updateFilters() {
   
   }
   
-  
-
   // 7. Use this function to filter the table when data is entered.
   function filterTable() {
   
@@ -62,12 +60,13 @@ function updateFilters() {
   
     // 9. Loop through all of the filters and keep any data that
     // matches the filter values
-    filters.forEach(function (filterValue) {
-      if (filterValue === filteredData.filter(row => row.filter === filterValue)) {
-        filteredData = filteredData.filter(row);
-      };
+  //  filteredData = filteredData.filter(row => row['datetime'] === filters['datetime'])
+  //  filteredData = filteredData.filter(row => row['city'] === filters['city'])
+
+    Object.entries(filters).forEach(([key,value]) => {
+      filteredData = filteredData.filter(row => row[key] === value)
+    });   
       
-  })
   
     // 10. Finally, rebuild the table using the filtered data
     buildTable(filteredData);
